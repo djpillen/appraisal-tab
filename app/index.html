@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appraisalTab" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Appraisal tab</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/jstree/dist/themes/default/style.min.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/bootstrap.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/directory-picker.css">
+  <link rel="stylesheet" href="css/file-explorer.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container-fluid">
+
+        <a class="brand">Archivematica</a>
+
+        <ul class="nav">
+
+        <li class="{% active request url_transfer %}"><a>Transfer</a></li>
+        <li class="{% active request url_ingest %}"><a>Ingest</a></li>
+        <li class="{% active request url_archival_storage %}"><a>Archival storage</a></li>
+        <li class="{% active request url_fpr %}"><a>Preservation planning</a></li>
+        <li class="{% active request url_access %}"><a>Access</a></li>
+        <li class="{% active request url_administration %}"><a>Administration</a></li>
+
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="view-container">
+    <div ng-view class="view-frame"></div>
+  </div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/jstree/dist/jstree.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/ng-js-tree/dist/ngJsTree.js"></script>
+  <script src="app.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/services.js"></script>
+  <script src="report/report.js"></script>
+  <script src="transfer_browser/transfer_browser.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+</body>
+</html>

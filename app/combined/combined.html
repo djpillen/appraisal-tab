@@ -1,0 +1,19 @@
+<div ng-controller='TransferBrowserCtrl as ctrl' style='float:left; width: 460px;'>
+    Data:
+    <div js-tree="treeConfig" ng-model="treeData" tree="treeInstance" tree-events="select_node:selectCB;ready:readyCB"></div>
+</div>
+
+<div ng-controller='ReportCtrl' style='margin-left: 30px; float:left;'>
+<h2>Report</h2>
+<b><ng-pluralize count="(records | filter:{root: true}).length" when="{'1': '1 transfer', 'other': '{} transfers'}"></ng-pluralize></b>, <ng-pluralize count="records.length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize></b> selected<br>
+
+<div class="span12"><i>File types:</i><br></div>
+By PUID:<br>
+<table>
+<tr ng-repeat="record in records | puid_data">
+  <td><a target="_blank" href="http://apps.nationalarchives.gov.uk/pronom/{{ record.puid }}">{{ record.puid }}</a></td>
+  <td>{{ record.data.count }} objects</td>
+  <td>{{ record.data.size }} MB</td>
+</tr>
+</table>
+</div>
