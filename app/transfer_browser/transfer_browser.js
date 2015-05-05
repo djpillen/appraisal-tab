@@ -2,7 +2,7 @@
 
 var transferBrowserControllers = angular.module('transferBrowserControllers', []);
 
-transferBrowserControllers.controller('TransferBrowserCtrl', ['$scope', 'Transfer', 'File',
+transferBrowserControllers.controller('TransferBrowserController', ['$scope', 'Transfer', 'File',
   function($scope, Transfer, File) {
     $scope.treeConfig = {
         "plugins": [ "checkbox" ]

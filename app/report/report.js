@@ -2,7 +2,7 @@
 
 var reportControllers = angular.module('reportControllers', []);
 
-reportControllers.controller('ReportCtrl', ['$scope', 'Transfer',
+reportControllers.controller('ReportController', ['$scope', 'Transfer',
   function($scope, Transfer) {
     $scope.records = Transfer.query();
   }]);

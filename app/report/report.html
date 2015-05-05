@@ -1,4 +1,4 @@
-<div ng-controller='ReportCtrl'>
+<div ng-controller='ReportController'>
     <h3>Report</h3>
     <b><ng-pluralize count="(records | filter:{root: true}).length" when="{'1': '1 transfer', 'other': '{} transfers'}"></ng-pluralize></b>, <ng-pluralize count="records.length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize></b> selected<br>
 
@@ -11,5 +11,4 @@
       <td>{{ record.data.size }} MB</td>
     </tr>
     </table>
-    </div>
 </div>

@@ -15,11 +15,11 @@ appraisalTabApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/transfer_browser', {
         templateUrl: 'transfer_browser/transfer_browser.html',
-        controller: 'TransferBrowserCtrl'
+        controller: 'TransferBrowserController'
     }).
     when('/report', {
         templateUrl: 'report/report.html',
-        controller: 'ReportCtrl'
+        controller: 'ReportController'
     }).
     when('/combined', {
         templateUrl: 'combined/combined.html'
