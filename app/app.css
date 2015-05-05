@@ -28,3 +28,12 @@
   content: "";
   padding: 0;
 }
+
+.pane {
+  min-width: 30%;
+  float: left;
+  padding: 5px;
+  margin: 2px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+}
