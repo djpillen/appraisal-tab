@@ -24,6 +24,6 @@ appraisalTabApp.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'combined/combined.html'
     }).
     otherwise({
-        redirectTo: '/report'
+        redirectTo: '/combined'
     });
 }]);
