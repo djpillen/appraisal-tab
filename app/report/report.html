@@ -1,9 +1,9 @@
-<div ng-controller='ReportCtrl' style='margin-left: 30px; float:left;'>
-    <h2>Report</h2>
+<div ng-controller='ReportCtrl'>
+    <h3>Report</h3>
     <b><ng-pluralize count="(records | filter:{root: true}).length" when="{'1': '1 transfer', 'other': '{} transfers'}"></ng-pluralize></b>, <ng-pluralize count="records.length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize></b> selected<br>
 
-    <div class="span12"><i>File types:</i><br></div>
-    By PUID:<br>
+    <h4>File types</h4>
+    <h5>By PUID</h5>
     <table>
     <tr ng-repeat="record in records | puid_data">
       <td><a target="_blank" href="http://apps.nationalarchives.gov.uk/pronom/{{ record.puid }}">{{ record.puid }}</a></td>
