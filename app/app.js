@@ -6,6 +6,7 @@ var appraisalTabApp = angular.module('appraisalTab', [
   'ngJsTree',
   'reportControllers',
   'transferBrowserControllers',
+  'hollyControllers',
   'appraisalTabFilters',
   'appraisalTabServices'
 ])
@@ -22,6 +23,10 @@ appraisalTabApp.config(['$routeProvider', function($routeProvider) {
     }).
     when('/combined', {
         templateUrl: 'combined/combined.html'
+    }).
+    when('/holly', {
+        templateUrl: 'holly/holly.html',
+        controller: 'HollyController'
     }).
     otherwise({
         redirectTo: '/combined'
