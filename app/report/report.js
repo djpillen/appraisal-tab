@@ -2,7 +2,7 @@
 
 var reportControllers = angular.module('reportControllers', []);
 
-reportControllers.controller('ReportController', ['$scope', 'Transfer',
-  function($scope, Transfer) {
-    $scope.records = Transfer.query();
+reportControllers.controller('ReportController', ['$scope', 'File',
+  function($scope, File) {
+    $scope.records = File.selected_records;
   }]);
