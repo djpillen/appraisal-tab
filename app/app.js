@@ -8,6 +8,7 @@ var appraisalTabApp = angular.module('appraisalTab', [
   'transferBrowserControllers',
   'hollyControllers',
   'appraisalTabFilters',
+  'hollyFilters',
   'appraisalTabServices',
   'hollyServices',
 ]);

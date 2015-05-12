@@ -23,3 +23,11 @@ angular.module('appraisalTabFilters', []).filter('puid_data', function() {
       return out_data;
     });
 });
+
+angular.module('hollyFilters', []).filter('capitalize', function() {
+  return function(input) {
+    if (input) {
+      return input[0].toUpperCase() + input.slice(1);
+    }
+  };
+});
