@@ -8,8 +8,9 @@ var appraisalTabApp = angular.module('appraisalTab', [
   'transferBrowserControllers',
   'hollyControllers',
   'appraisalTabFilters',
-  'appraisalTabServices'
-])
+  'appraisalTabServices',
+  'hollyServices',
+]);
 
 appraisalTabApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.

@@ -2,8 +2,8 @@
 
 var hollyControllers = angular.module('hollyControllers', []);
 
-hollyControllers.controller('HollyController', ['$scope', '$timeout',
-    function($scope, $timeout) {
+hollyControllers.controller('HollyController', ['$scope', '$timeout', 'EmailParser',
+    function($scope, $timeout, EmailParser) {
         $scope.clock = {};
         var updateClock = function () {
             $scope.clock.now = new Date();
@@ -20,6 +20,12 @@ hollyControllers.controller('HollyController', ['$scope', '$timeout',
         $scope.person = {
             name: 'Holly B',
         };
+
+        $scope.$watch('emailBody', function(body) {
+            if (body) {
+                $scope.previewText = EmailParser.parse(body, { to: $scope.to });
+            }
+        });
     }
 ]);
 

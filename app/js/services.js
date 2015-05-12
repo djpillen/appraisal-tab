@@ -2,6 +2,21 @@
 
 var appraisalTabServices = angular.module('appraisalTabServices', ['ngResource']);
 
+var hollyServices = angular.module('hollyServices', []);
+
+// Should this be its own services file? Where?
+hollyServices.factory('EmailParser', ['$interpolate',
+    function($interpolate) {
+        // service
+        return {
+            parse: function(text, context) {
+                var template = $interpolate(text);
+                return template(context);
+            }
+        };
+    }
+]);
+
 appraisalTabServices.factory('Transfer', ['$resource',
   function($resource) {
     return $resource('fixtures/transfers.json', {}, {
