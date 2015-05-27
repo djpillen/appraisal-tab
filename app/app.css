@@ -37,3 +37,14 @@
   border: 1px solid #dddddd;
   border-radius: 3px;
 }
+
+input.ng-invalid {
+  border: 2px dotted red;
+}
+
+input.ng-valid {
+  border: 1px solid green;
+}
+input.ng-pristine {
+  border: 1px solid gray;
+}

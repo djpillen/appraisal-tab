@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 var appraisalTabApp = angular.module('appraisalTab', [
   'ngRoute',
+  'ngMessages',
   'ngJsTree',
   'reportControllers',
   'transferBrowserControllers',
