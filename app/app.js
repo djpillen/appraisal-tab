@@ -1,6 +1,7 @@
 // third-party modules
 import angular from 'angular';
 import './vendor/angular-charts/angular-charts.js';
+import 'angular-gettext';
 import 'angular-route';
 import 'angular-route-segment';
 import './vendor/angular-tree-control/angular-tree-control.js';
@@ -52,6 +53,7 @@ import './components/version/version.js';
 // Declare app level module which depends on views, and components
 module.exports = angular.module('appraisalTab', [
   'ngRoute',
+  'gettext',
   'route-segment',
   'view-segment',
   'angularCharts',
@@ -86,6 +88,22 @@ module.exports = angular.module('appraisalTab', [
   'treeController',
   'visualizationsController',
 ]).
+
+run(function ($window, gettextCatalog) {
+    // Look up current language, fallback to English
+    var currentLanguage;
+    try {
+      currentLanguage = $window.DashboarConfig.currentLanguage
+    } catch (err) {
+      currentLanguage = 'en';
+    }
+    gettextCatalog.setCurrentLanguage(currentLanguage);
+
+    // Load translations
+    for (let [langCode, translations] of Object.entries(require('json!./locale/translations.json'))) {
+      gettextCatalog.setStrings(langCode, translations);
+    }
+}).
 
 config(['RestangularProvider', function(RestangularProvider) {
   RestangularProvider.setRequestSuffix('/');

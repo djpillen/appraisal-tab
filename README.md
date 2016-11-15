@@ -291,6 +291,37 @@ This has a few implications:
 
 * Write every file as a module, and export appropriate values if there's something to export. This behaves a bit strangely in the context of Angular modules (since Angular has its own module system which defines modules via side effects of `angular.module` calls), but works very well for things like helper functions and classes.
 * Within modules, it's not necessary to worry about polluting the global object: variables are no longer being magically attached to `window`. This means IIFEs are unnecessary.
-* Make sure that all dependencies get imported in the places they're used, instead of relying on global <script> tags in the HTML page.
+* Make sure that all dependencies get imported in the places they're used, instead of relying on global `<script>` tags in the HTML page.
 
 Prefer using the ES2015 `import` syntax over the `require` function when writing code in the appraisal tab.
+
+
+Translations
+------------
+
+This process has not been wired with Webpack yet.
+
+You need to install `angular-gettext-cli`. It is not an application dependency,
+it is a build dependency.
+
+    npm install -g angular-gettext-cli
+
+Extract messages:
+
+    # Attention, this is going to include the dist file - please remove before you run this command!
+    rm app/appraisal_tab.js
+    angular-gettext-cli --files "./app/**/*.+(js|html)" --dest "./app/locale/extract.pot" --marker-name "i18n"
+
+Push messages to Transifex:
+
+    tx push -s
+
+Pull translations from Transifex:
+
+    tx pull -a
+
+Compile messages:
+
+    angular-gettext-cli --compile --files "app/locale/*.po" --dest "app/locale/translations.json" --format "json" --module "appraisalTab"
+
+The contents of `app/locale` should be tracked in git.
