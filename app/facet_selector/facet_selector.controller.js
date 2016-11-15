@@ -2,7 +2,7 @@ import angular from 'angular';
 
 angular.module('facetController', ['tagService']).
 
-controller('FacetController', ['$scope', 'Transfer', 'Facet', function($scope, Transfer, Facet) {
+controller('FacetController', ['$scope', 'gettextCatalog', 'Transfer', 'Facet', function($scope, gettextCatalog, Transfer, Facet) {
   $scope.remove_facet = function(name, id) {
     Facet.remove_by_id(name, id);
     Transfer.filter();
@@ -15,7 +15,7 @@ controller('FacetController', ['$scope', 'Transfer', 'Facet', function($scope, T
       return;
     }
 
-    Facet.add('tags', selected, {name: 'Tag', text: selected});
+    Facet.add('tags', selected, {name: gettextCatalog.getString('Tag'), text: selected});
     Transfer.filter();
     $scope.tag_facet = '';
   });

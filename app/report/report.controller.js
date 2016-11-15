@@ -7,7 +7,7 @@ controller('ReportSelectionController', ['$scope', '$routeSegment', function($sc
 }]).
 
 // Used to display the file information table.
-controller('ReportController', ['$scope', 'Facet', 'SelectedFiles', 'Transfer', function($scope, Facet, SelectedFiles, Transfer) {
+controller('ReportController', ['$scope', 'gettextCatalog', 'Facet', 'SelectedFiles', 'Transfer', function($scope, gettextCatalog, Facet, SelectedFiles, Transfer) {
   $scope.records = SelectedFiles;
 
   // There are several columns which can be sorted on; the user can click on the
@@ -42,12 +42,12 @@ controller('ReportController', ['$scope', 'Facet', 'SelectedFiles', 'Transfer', 
   };
 
   $scope.add_format_facet = format => {
-    Facet.add('format', format, {name: 'Format', text: format});
+    Facet.add('format', format, {name: gettextCatalog.getString('Format'), text: format});
     Transfer.filter();
   };
 
   $scope.add_group_facet = group => {
-    Facet.add('group', group, {name: 'Format group', text: group});
+    Facet.add('group', group, {name: gettextCatalog.getString('Format group'), text: group});
     Transfer.filter();
   };
 }]);

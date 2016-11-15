@@ -6,7 +6,7 @@ angular.module('visualizationsController', [
 ]).
 
 // Feeds data into the graphs in the two visualization partials.
-controller('VisualizationsController', ['$scope', 'Facet', 'SelectedFiles', 'Transfer', function($scope, Facet, SelectedFiles, Transfer) {
+controller('VisualizationsController', ['$scope', 'gettextCatalog', 'Facet', 'SelectedFiles', 'Transfer', function($scope, gettextCatalog, Facet, SelectedFiles, Transfer) {
   // Displays aggregate information about file formats;
   // the selected record data is filtered/reformatted in the view.
   $scope.records = SelectedFiles;
@@ -16,7 +16,7 @@ controller('VisualizationsController', ['$scope', 'Facet', 'SelectedFiles', 'Tra
   $scope.format_config = {
     // Formats (total)
     click: record => {
-      Facet.add('format', record.data.format, {name: 'Format', text: record.data.format});
+      Facet.add('format', record.data.format, {name: gettextCatalog.getString('Format'), text: record.data.format});
       Transfer.filter();
     },
     tooltips: true,
@@ -32,7 +32,7 @@ controller('VisualizationsController', ['$scope', 'Facet', 'SelectedFiles', 'Tra
   $scope.size_config = {
     // Formats (by size)
     click: record => {
-      Facet.add('format', record.data.format, {name: 'Format', text: record.data.format});
+      Facet.add('format', record.data.format, {name: gettextCatalog.getString('Format'), text: record.data.format});
       Transfer.filter();
     },
     tooltips: true,

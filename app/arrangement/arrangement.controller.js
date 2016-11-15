@@ -4,7 +4,7 @@ angular.module('arrangementController', ['sipArrangeService']).
 
 // This controller is responsible for the appraisal tab's implementation of SIP arrange.
 // It doesn't have its own partial, and its scope is located in front_page/content.html
-controller('ArrangementController', ['$scope', 'Alert', 'Transfer', 'SipArrange', function($scope, Alert, Transfer, SipArrange) {
+controller('ArrangementController', ['$scope', 'gettextCatalog', 'Alert', 'Transfer', 'SipArrange', function($scope, gettextCatalog, Alert, Transfer, SipArrange) {
   var vm = this;
 
   var load_data = () => {
@@ -48,7 +48,7 @@ controller('ArrangementController', ['$scope', 'Alert', 'Transfer', 'SipArrange'
   };
 
   vm.create_directory = parent => {
-    var path = prompt('Name of new directory?');
+    var path = prompt(gettextCatalog.getString('Name of new directory?'));
     if (!path) {
       return;
     }
@@ -93,14 +93,14 @@ controller('ArrangementController', ['$scope', 'Alert', 'Transfer', 'SipArrange'
 
       Alert.alerts.push({
         'type': 'success',
-        'message': 'SIP successfully started!',
+        'message': gettextCatalog.getString('SIP successfully started!'),
       });
     };
 
     var on_failure = error => {
       Alert.alerts.push({
         'type': 'danger',
-        'message': 'SIP could not be started! Check dashboard logs.',
+        'message': gettextCatalog.getString('SIP could not be started! Check dashboard logs.'),
       });
     };
 
@@ -146,7 +146,7 @@ controller('ArrangementController', ['$scope', 'Alert', 'Transfer', 'SipArrange'
   var on_copy_failure = error => {
     Alert.alerts.push({
       'type': 'danger',
-      'message': 'Failed to copy files to SIP arrange; check Dashboard logs.',
+      'message': gettextCatalog.getString('Failed to copy files to SIP arrange; check Dashboard logs.'),
     });
   };
   var on_copy_success = success => {

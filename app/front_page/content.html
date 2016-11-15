@@ -2,7 +2,7 @@
   <form id='search_form'>
   <div id='search_form_container'></div>
   <div id='search_form_submit_container'>
-    <input class='form-control btn-primary' type='button' id='search_submit' value='Search transfer backlog'>
+    <input class='form-control btn-primary' type='button' id='search_submit' value='{{ "Search transfer backlog" | translate }}'>
   </div>
   </form>
 
@@ -13,9 +13,9 @@
 
 <div class='facet-box panel panel-body form' ng-controller="FacetController">
   <fieldset>
-    <label for='tag-facet'>Tags</label>
+    <label for='tag-facet'>{{ "Tags" | translate }}</label>
     <select ng-model="tag_facet" class='form-control' id='tag-facet'>
-      <option value="">All</option>
+      <option value="">{{ "All" | translate }}</option>
       <option ng-repeat="tag in transfers.tags" value="{{ tag }}">{{ tag }}</option>
     </select>
   </fieldset>
@@ -35,22 +35,25 @@
 
 <ui-minimize-bar>
 
-<ui-minimize-panel title='Backlog' open='true' class="transfer-panel">
+<ui-minimize-panel title="{{ 'Backlog' | translate }}" open="true" class="transfer-panel">
   <div class='panel panel-default' ng-controller="TreeController">
     <div class='panel-heading'>
-      Backlog
+      {{ "Backlog" | translate }}
 
-      <span class="counts"><b><ng-pluralize count="(files.selected | filter:{'type': 'transfer'}).length" when="{'1': '1 transfer', 'other': '{} transfers'}"></ng-pluralize></b>, <ng-pluralize count="files.selected.length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize></b> selected</span>
+      <span class="counts">
+        <b translate translate-n="(files.selected | filter:{'type': 'transfer'}).length" translate-plural="{{$count}} transfers">1 transfer</b>,
+        <b translate translate-n="files.selected.length" translate-plural="{{$count}} objects selected">1 object selected</b>
+      </span>
 
       <form ng-submit="submit()" class="form-inline">
         <input type="text" ng-model="tag" ng-disabled="files.selected.length < 1" class="form-control input-sm">
-        <input type="submit" id="submit-tag" value="Add tag to selected files" ng-disabled="files.selected.length < 1" class='btn btn-sm btn-default'>
+        <input type="submit" id="submit-tag" value="{{ 'Add tag to selected files' | translate }}" ng-disabled="files.selected.length < 1" class='btn btn-sm btn-default'>
       </form>
 
       <div class='actions'>
-        <input class='btn btn-sm btn-default' type="button" value="Deselect all" ng-click="deselect()" ng-disabled="files.selected.length < 1">
-        <input class='btn btn-sm btn-default' type="button" value="Collapse all" ng-click="transfers.collapse_all_nodes()">
-        <input class='btn btn-sm btn-default' type="button" value="Expand all" ng-click="transfers.expand_all_nodes()">
+        <input class='btn btn-sm btn-default' type="button" value="{{ 'Deselect all' | translate }}" ng-click="deselect()" ng-disabled="files.selected.length < 1">
+        <input class='btn btn-sm btn-default' type="button" value="{{ 'Collapse all' | translate }}" ng-click="transfers.collapse_all_nodes()">
+        <input class='btn btn-sm btn-default' type="button" value="{{ 'Expand all' | translate }}" ng-click="transfers.expand_all_nodes()">
       </div>
     </div>
 
@@ -74,21 +77,21 @@
   </div>
 </ui-minimize-panel>
 
-<ui-minimize-panel title="Analysis" open='true'>
+<ui-minimize-panel title="{{ 'Analysis' | translate }}" open='true'>
   <div class='panel panel-default' ng-controller="AnalysisController">
     <div>
       <ul class="nav nav-pills nav-pane" role='menu'>
         <li ng-class="{ active: $routeSegment.contains('objects') }">
-          <a href="#{{ $routeSegment.getSegmentUrl('objects') }}">Objects</a>
+          <a href="#{{ $routeSegment.getSegmentUrl('objects') }}">{{ "Objects" | translate }}</a>
         </li>
         <li ng-class="{ active: $routeSegment.contains('tags') }">
-          <a href="#{{ $routeSegment.getSegmentUrl('tags') }}">Tags</a>
+          <a href="#{{ $routeSegment.getSegmentUrl('tags') }}">{{ "Tags" | translate }}</a>
         </li>
         <li ng-class="{ active: $routeSegment.contains('examine_contents') }">
-          <a href="#{{ $routeSegment.getSegmentUrl('examine_contents', {type: ''}) }}">Examine contents</a>
+          <a href="#{{ $routeSegment.getSegmentUrl('examine_contents', {type: ''}) }}">{{ "Examine contents" | translate }}</a>
         </li>
         <li ng-class="{ active: $routeSegment.contains('preview') }">
-          <a href="#{{ $routeSegment.getSegmentUrl('preview', {id: ''}) }}">Preview file</a>
+          <a href="#{{ $routeSegment.getSegmentUrl('preview', {id: ''}) }}">{{ "Preview file" | translate }}</a>
         </li>
       </ul>
     </div>
@@ -96,25 +99,25 @@
   </div>
 </ui-minimize-panel>
 
-<ui-minimize-panel title="File list" open='false'>
+<ui-minimize-panel title="{{ 'File list' | translate }}" open='false'>
   <div class='panel panel-default' ng-controller="FileListController as vm">
     <div class='panel-heading'>
-      File List
+      {{ "File list" | translate }}
 
       <span class="counts" ng-if="vm.selected_files.selected.length > 0"><b><ng-pluralize count="(vm.selected_files.selected | filter: {'type': 'file'} | facet).length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize></b> in list, <ng-pluralize count="vm.selected.length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize> selected</span>
 
-      <span class="counts" ng-if="vm.selected_files.selected.length === 0">File list is empty.</span>
+      <span class="counts" ng-if="vm.selected_files.selected.length === 0">{{ "File list is empty." | translate }}</span>
 
       <!--
       <fieldset>
-        <label for='start-date-facet'>Date range start</label>
+        <label for='start-date-facet'>{{ "Date range start" | translate }}</label>
         <input type="text"
                ng-model="vm.date_start"
                class='form-control'
                id='start-date-facet'
                ng-change="vm.set_date_filter(vm.date_start, vm.date_end)"
                ng-pattern="vm.date_regex"/>
-        <label for='end-date-facet'>Date range end</label>
+        <label for='end-date-facet'>{{ "Date range end" | translate }}</label>
         <input type="text"
                ng-model="vm.date_end"
                class='form-control'
@@ -122,7 +125,7 @@
                ng-change="vm.set_date_filter(vm.date_start, vm.date_end)"
                ng-pattern="vm.date_regex"/>
       </fieldset>
-      <span ng-if="vm.date_facet">Dates: {{ vm.date_facet }} <span ng-click="vm.reset_dates();"><i class="fa fa-times"></i></span></span>
+      <span ng-if="vm.date_facet">{{ 'Dates:' | translate }} {{ vm.date_facet }} <span ng-click="vm.reset_dates();"><i class="fa fa-times"></i></span></span>
       -->
 
       <form ng-if="vm.selected_files.selected.length > 0" ng-submit="vm.submit(vm.selected)" class="form-inline">
@@ -138,7 +141,8 @@
       </form>
 
       <div class='actions' ng-if="vm.selected_files.selected.length > 0">
-        <input class='btn btn-sm btn-default' type="button" ng-value="vm.show_path ? 'Hide path' : 'Show path'" ng-click="vm.show_path = !vm.show_path">
+        <input class='btn btn-sm btn-default' type="button" ng-hide="vm.show_path" ng-value="{{ 'Show path:' | translate }}" ng-click="vm.show_path = !vm.show_path">
+        <input class='btn btn-sm btn-default' type="button" ng-show="vm.show_path" ng-value="{{ 'Hide path:' | translate }}" ng-click="vm.show_path = !vm.show_path">
       </div>
     </div>
 
@@ -152,11 +156,11 @@
                    ng-checked="vm.all_selected"
                    ng-click="vm.select_all()">
           </th>
-          <th><a ng-click="vm.set_sort_property('title')">Filename</a></th>
-          <th ng-if="vm.show_path"><a ng-click="vm.set_sort_property('relative_path')">Path</a></th>
-          <th><a ng-click="vm.set_sort_property('size')">Size</a></th>
-          <th><a ng-click="vm.set_sort_property('last_modified')">Last modified</a></th>
-          <th>Tags</th>
+          <th><a ng-click="vm.set_sort_property('title')">{{ "Filename" | translate }}</a></th>
+          <th ng-if="vm.show_path"><a ng-click="vm.set_sort_property('relative_path')">{{ "Path" | translate }}</a></th>
+          <th><a ng-click="vm.set_sort_property('size')">{{ "Size" | translate }}</a></th>
+          <th><a ng-click="vm.set_sort_property('last_modified')">{{ "Last modified" | translate }}</a></th>
+          <th>{{ "Tags" | translate }}</th>
         </tr>
         <tr ng-repeat="file in vm.selected_files.selected | facet | filter: {'date': '*'} : vm.facet_filter | filter: {'type': 'file'} | orderBy: vm.sort_property : vm.sort_reverse">
           <td>
@@ -173,7 +177,7 @@
             <a href="#{{ vm.$routeSegment.getSegmentUrl('preview', {id: file.id}) }}">{{ file.title }}</a>
           </td>
           <td ng-if="vm.show_path">{{ file.relative_path }}</td>
-          <td>{{ file.size | number}} MB</td>
+          <td>{{ file.size | number }} MB</td>
           <td>{{ file.last_modified }}</td>
           <td>
             <span class="tag" ng-repeat="tag in file.tags">{{ tag }} <span ng-click="vm.remove_tag(file.id, tag)"><i class="fa fa-minus-square"></i></span></span>
@@ -184,15 +188,15 @@
   </div>
 </ui-minimize-panel>
 
-<ui-minimize-panel title='ArchivesSpace' class="aspace-panel">
+<ui-minimize-panel title="{{ 'ArchivesSpace' | translate }}" class="aspace-panel">
   <div class='panel panel-default' ng-controller="ArchivesSpaceController">
     <div class='panel-heading'>
-      ArchivesSpace <span ng-if="loading"><i class="fa fa-spinner fa-spin"></i></span>
+      {{ "ArchivesSpace" | translate }} <span ng-if="loading"><i class="fa fa-spinner fa-spin"></i></span>
 
       <form ng-submit="load_data({title: title_query, identifier: id_query})" class="form-inline">
-        <input type="text" ng-model="title_query" placeholder="Title" class="form-control input-sm"/>
-        <input type="text" ng-model="id_query" placeholder="Identifier" class="form-control input-sm"/>
-        <input type="submit" class='btn btn-sm btn-primary' id="archivesspace_search" value="Search ArchivesSpace"/>
+        <input type="text" ng-model="title_query" placeholder="{{ 'Title' | translate }}" class="form-control input-sm"/>
+        <input type="text" ng-model="id_query" placeholder="{{ 'Identifier' | translate }}" class="form-control input-sm"/>
+        <input type="submit" class='btn btn-sm btn-primary' id="archivesspace_search" value="{{ 'Search ArchivesSpace' | translate }}"/>
       </form>
 
       <div class="actions">
@@ -201,38 +205,38 @@
                id='add_child_record'
                ng-disabled="!selected"
                ng-click="add_child(selected)"
-               value='Add New Child Record'>
+               value='{{ "Add new child record" | translate }}'>
         <input type='button'
                class='btn btn-primary btn-sm'
                id='add_child_record'
                ng-disabled="selected.type !== 'resource' &amp;&amp; selected.type !== 'resource_component'"
                ng-click="add_digital_object(selected)"
-               value='Add New Digital Object'>
+               value='{{ "Add new digital object" | translate }}'>
         <a class='btn btn-primary btn-sm'
            href="{{ get_rights_url(selected) }}"
            ng-disabled="selected.type !== 'resource' &amp;&amp; selected.type !== 'resource_component'"
            target='_blank'>
-          Edit Rights Metadata
+          {{ "Edit rights metadata" | translate }}
         </a>
         <input type='button'
                class='btn btn-primary btn-sm'
                id='edit_record'
                ng-disabled="!selected || selected.request_pending || selected.type === 'digital_object'"
                ng-click="edit(selected)"
-               value='Edit Metadata'>
+               value='{{ "Edit metadata" | translate }}'>
         <input type='button'
                class='btn btn-primary btn-sm'
                id='delete_record'
                ng-disabled="!selected || selected.request_pending"
-               ng-confirm-click="Are you sure you want to delete this?"
+               ng-confirm-click="{{ 'Are you sure you want to delete this?' | translate }}"
                ng-click="remove(selected)"
-               value='Delete selected'>
+               value='{{ "Delete selected" | translate }}'>
         <input type='button'
                class='btn btn-success btn-sm'
                id='finalize_arrange'
                ng-disabled="selected.request_pending || (selected.type !== 'resource' &amp;&amp; selected.type !== 'resource_component')"
                ng-click="finalize_arrangement(selected)"
-               value='Finalize Arrangement'>
+               value='{{ "Finalize arrangement" | translate }}'>
        </div>
     </div>
     <div class="transfer-tree panel-body">
@@ -276,40 +280,40 @@
   </div>
 </ui-minimize-panel>
 
-<ui-minimize-panel title='Arrangement'>
+<ui-minimize-panel title="{{ 'Arrangement' | translate }}">
 <div class='panel panel-default'>
   <div class='panel-heading'>
-    Arrangement
+    {{ "Arrangement" | translate }}
   </div>
   <div class="transfer-tree panel-body" ng-controller="ArrangementController as vm">
     <input type="button"
            class="btn btn-primary"
            id="add_directory"
            ng-click="vm.create_directory(vm.selected)"
-           value="Add Directory">
+           value="{{ 'Add directory' | translate }}">
     <input type="button"
            class="btn btn-primary"
            id="edit_metadata_arrangement"
            ng-disabled="true"
-           value="Edit Metadata">
+           value="{{ 'Edit Metadata' | translate }}">
     <input type="button"
            class="btn btn-primary"
            id="delete_directory"
            ng-disabled="!vm.selected"
-           ng-confirm-click="Are you sure you want to delete this?"
+           ng-confirm-click="{{ 'Are you sure you want to delete this?' | translate }}"
            ng-click="vm.delete_directory(vm.selected)"
-           value="Delete selected">
+           value="{{ 'Delete selected' | translate }}">
     <input type="button"
            class="btn btn-primary"
            id="start_sip_arrangemnt"
            ng-disabled="!vm.selected"
            ng-click="vm.start_sip(vm.selected)"
-           value="Create SIP">
+           value="{{ 'Create SIP' | translate }}">
     <input type="button"
            class="btn btn-primary"
            id="refresh"
            ng-click="vm.refresh(vm.selected)"
-           value="Reload">
+           value="{{ 'Reload' | translate }}">
     <treecontrol id="arrangement-tree"
           class="tree-classic"
           tree-model="vm.data"

@@ -24,7 +24,7 @@ angular.module('archivesSpaceController', ['alertService', 'sipArrangeService', 
 // Both the partials and some parts of code in the controller distinguish between these
 // categories using the "type" parameter, and use that to control display logic and to
 // dispatch to different functions which operate on them.
-controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'ArchivesSpace', 'SipArrange', 'Transfer', function($scope, $uibModal, Alert, ArchivesSpace, SipArrange, Transfer) {
+controller('ArchivesSpaceController', ['$scope', 'gettextCatalog', '$uibModal', 'Alert', 'ArchivesSpace', 'SipArrange', 'Transfer', function($scope, gettextCatalog, $uibModal, Alert, ArchivesSpace, SipArrange, Transfer) {
   $scope.get_rights_url = (record) => {
     if (record === undefined) {
       return '';
@@ -158,7 +158,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
 
         Alert.alerts.push({
           type: 'danger',
-          message: `Unable to submit edits to record "${title}"; check dashboard logs.`,
+          message: gettextCatalog.getString('Unable to submit edits to record "{{title}}"; check dashboard logs.', { title: title }),
         });
       };
 
@@ -222,9 +222,9 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
         result.display_title = result.title;
         if (result.dates) {
           if (result.title) {
-            result.display_title += ', '; 
+            result.display_title += ', ';
           }
-          result.display_title += result.dates; 
+          result.display_title += result.dates;
         }
         append_child(node, result);
       };
@@ -232,7 +232,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
       var on_failure = error => {
         Alert.alerts.push({
           type: 'danger',
-          message: `Unable to add new child record to record ${node.id}`,
+          message: gettextCatalog.getString('Unable to add new child record to record {{id}}', { id: node.id }),
         });
       };
 
@@ -265,7 +265,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
     var on_failure = result => {
       Alert.alerts.push({
         type: 'danger',
-        message: `Unable to add new digital object component to record ${node.id}`,
+        message: gettextCatalog.getString('Unable to add new digital object component to record {{id}}', { id: node.id }),
       });
     };
 
@@ -297,7 +297,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
     var on_failure_aspace = error => {
       Alert.alerts.push({
         type: 'danger',
-        message: `Unable to fetch record ${node.id} from ArchivesSpace!`,
+        message: gettextCatalog.getString('Unable to fetch record {{id}} from ArchivesSpace!', { id: node.id }),
       });
       $scope.loading = false;
     };
@@ -305,7 +305,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
     var on_failure_arrange = error => {
       Alert.alerts.push({
         type: 'danger',
-        message: `Unable to fetch record ${node.path} from Arrangement!`,
+        message: gettextCatalog.getString('Unable to fetch record {{path}} from Arrangement!', { path: node.path }),
       });
       $scope.loading = false;
     };
@@ -351,7 +351,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
       $scope.loading = false;
       Alert.alerts.push({
         type: 'danger',
-        message: 'Unable to access ArchivesSpace; check dashboard logs!',
+        message: gettextCatalog.getString('Unable to access ArchivesSpace; check dashboard logs!'),
       });
     };
 
@@ -554,7 +554,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
       node.request_pending = false;
       Alert.alerts.push({
         type: 'success',
-        message: `Successfully started SIP from record "${node.title}"`,
+        message: gettextCatalog.getString('Successfully started SIP from record "{{title}}"', { title: node.title }),
       });
 
       // Remove the digital object components so the user doesn't try to add new items
@@ -565,9 +565,9 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
       var message;
       // error.message won't be defined if this returned an HTML 500
       if (error.data.message && error.data.message.startsWith('No SIP Arrange')) {
-        message = `Unable to start SIP; no files arranged into record "${node.title}".`;
+        message = gettextCatalog.getString('Unable to start SIP; no files arranged into record "{{title}}".', { title: node.title });
       } else {
-        message = 'Unable to start SIP; check dashboard logs.';
+        message = gettextCatalog.getString('Unable to start SIP; check dashboard logs.');
       }
       Alert.alerts.push({
         type: 'danger',

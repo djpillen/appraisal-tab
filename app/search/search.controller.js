@@ -2,7 +2,7 @@ import angular from 'angular';
 
 angular.module('searchController', ['alertService', 'transferService']).
 
-controller('SearchController', ['$scope', 'Alert', 'Transfer', function($scope, Alert, Transfer) {
+controller('SearchController', ['$scope', 'gettextCatalog', 'Alert', 'Transfer', function($scope, gettextCatalog, Alert, Transfer) {
   var on_request = data => {
     $scope.$apply(() => {
       Transfer.resolve(data);
@@ -13,7 +13,7 @@ controller('SearchController', ['$scope', 'Alert', 'Transfer', function($scope, 
     $scope.$apply(() => {
       Alert.alerts.push({
         type: 'danger',
-        message: 'Unable to retrieve transfer data from Archivematica.',
+        message: gettextCatalog.getString('Unable to retrieve transfer data from Archivematica.'),
       });
     });
   };

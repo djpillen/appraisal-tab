@@ -10,7 +10,7 @@ angular.module('previewController', ['route-segment', 'selectedFilesService']).
 // FIXME If the file being previewed belongs to a SIP that's already been started,
 //       then the preview/download URL will 404. This looks really ugly to the
 //       end user. It would be great to find a more elegant solution to this.
-controller('PreviewController', ['$scope', '$routeSegment', 'Alert', 'File', 'SelectedFiles', function($scope, $routeSegment, Alert, File, SelectedFiles) {
+controller('PreviewController', ['$scope', 'gettextCatalog', '$routeSegment', 'Alert', 'File', 'SelectedFiles', function($scope, gettextCatalog, $routeSegment, Alert, File, SelectedFiles) {
   var vm = this;
 
   vm.set_file_data = file => {
@@ -33,7 +33,7 @@ controller('PreviewController', ['$scope', '$routeSegment', 'Alert', 'File', 'Se
       var on_failure = error => {
         Alert.alerts.push({
           type: 'danger',
-          message: 'Unable to retrieve metadata for file with UUID ' + $scope.id,
+          message: gettextCatalog.getString('Unable to retrieve metadata for file with UUID {{id}}', { id: $scope.id }),
         });
       };
       File.get($scope.id).then(file => {
