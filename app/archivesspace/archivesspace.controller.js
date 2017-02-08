@@ -162,13 +162,16 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
         });
       };
 
-      // Our nodes have cyclic references; elements track a "parent" reference,
-      // but since parents also track their children the relationship goes both
-      // ways.
-      // Make sure we delete the parent reference in the object we're POSTing,
-      // since otherwise we won't be able to JSON-serialize it.
-      let node_to_post = Object.assign({}, node);
-      delete node_to_post['parent'];
+      // Only post the information that may have changed for this node.
+      // Otherwise, this runs into problems with cyclic references and including
+      // irrelevant information that hasn't changed but also hasn't been
+      // populated correctly.
+      let node_to_post = {
+        'id': node.id,
+        'title': node.title,
+        'level': node.levelOfDescription,
+        'notes': node.notes,
+      };
 
       ArchivesSpace.edit(node.id, node_to_post).then(on_success, on_failure);
     });
