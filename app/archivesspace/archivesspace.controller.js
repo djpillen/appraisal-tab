@@ -577,7 +577,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
   };
 }]).
 
-controller('ArchivesSpaceEditController', ['$uibModalInstance', 'levels', 'level', 'title', 'start_date', 'end_date', 'date_expression', 'note', function($uibModalInstance, levels, level, title, start_date, end_date, date_expression, note, accessrestrict_note) {
+controller('ArchivesSpaceEditController', ['$uibModalInstance', 'levels', 'level', 'title', 'start_date', 'end_date', 'date_expression', 'note', 'accessrestrict_note', function($uibModalInstance, levels, level, title, start_date, end_date, date_expression, note, accessrestrict_note) {
   var vm = this;
 
   vm.levels = levels;
