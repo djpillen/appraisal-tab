@@ -32,6 +32,12 @@ controller('ExamineContentsController', ['$routeSegment', 'SelectedFiles', 'Tran
     Transfer.add_list_of_tags(ids, tag);
     this.tag = '';
   };
+
+  vm.cutRelativePath = relative_path => {
+    // Return only the part after '/objects/',
+    // using pop to return the full path otherwise
+    return relative_path.split('/objects/').pop();
+  };
 }]).
 
 controller('ExamineContentsFileController', ['$routeSegment', 'File', function($routeSegment, File) {

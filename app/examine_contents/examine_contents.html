@@ -21,8 +21,9 @@
   <div ng-if="(vm.SelectedFiles.selected | find_files).length != 0">
   <h2>Files</h2>
 
-  <form ng-submit="vm.submit(vm.selected)">
+  <form ng-submit="vm.submit(vm.selected)" class="form-inline examine-contents-form">
     <input type="text"
+           class="form-control input-sm"
            ng-model="vm.tag"
            ng-disabled="vm.selected.length < 1">
     <input type="submit"
@@ -57,7 +58,7 @@
              all-selected="vm.all_selected">
       </td>
       <td>
-        <a href="#{{ vm.$routeSegment.getSegmentUrl('examine_contents.file_info', {id: record.id, type: vm.type}) }}">{{ record.title }}</a>
+        <a href="#{{ vm.$routeSegment.getSegmentUrl('examine_contents.file_info', {id: record.id, type: vm.type}) }}">{{ vm.cutRelativePath(record.relative_path) }}</a>
       </td>
       <td>
         <a href="#{{ vm.$routeSegment.getSegmentUrl('preview', {id: record.id}) }}">Preview</a>
