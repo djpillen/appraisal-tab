@@ -14,8 +14,21 @@ filter('format_data', function() {
     var format_data = {};
     for (var i in records) {
       var record = records[i];
-      if (!record.format) {
+
+      // Don't count transfers or directories
+      if (record.type !== 'file') {
         continue;
+      }
+
+      // Set 'Unidentified' format and/or group for those
+      // files where they're missing. This also sets the 
+      // values in the records at the SelectedFiles service,
+      // allowing them to be filtered in the file list panel.
+      if (!record.format) {
+        record.format = 'Unidentified';
+      }
+      if (!record.group) {
+        record.group = 'Unidentified';
       }
 
       if (!format_data[record.format]) {
