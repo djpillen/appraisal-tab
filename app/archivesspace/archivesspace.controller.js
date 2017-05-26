@@ -554,7 +554,7 @@ controller('ArchivesSpaceController', ['$scope', 'gettextCatalog', '$uibModal', 
       node.request_pending = false;
       Alert.alerts.push({
         type: 'success',
-        message: gettextCatalog.getString('Successfully started SIP from record "{{title}}"', { title: node.title }),
+        message: gettextCatalog.getString('Successfully started SIP from record "{{title}}"', { title: node.display_title }),
       });
 
       // Remove the digital object components so the user doesn't try to add new items
@@ -565,7 +565,7 @@ controller('ArchivesSpaceController', ['$scope', 'gettextCatalog', '$uibModal', 
       var message;
       // error.message won't be defined if this returned an HTML 500
       if (error.data.message && error.data.message.startsWith('No SIP Arrange')) {
-        message = gettextCatalog.getString('Unable to start SIP; no files arranged into record "{{title}}".', { title: node.title });
+        message = gettextCatalog.getString('Unable to start SIP; no files arranged into record "{{title}}".', { title: node.display_title });
       } else {
         message = gettextCatalog.getString('Unable to start SIP; check dashboard logs.');
       }
